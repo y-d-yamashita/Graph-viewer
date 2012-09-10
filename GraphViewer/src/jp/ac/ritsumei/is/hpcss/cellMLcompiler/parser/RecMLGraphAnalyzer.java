@@ -15,6 +15,7 @@ import test.MyEdge;
 import test.MyNode;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.FRLayout;
+import edu.uci.ics.jung.algorithms.layout.ISOMLayout;
 import edu.uci.ics.jung.algorithms.layout.KKLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.RadialTreeLayout;
@@ -206,10 +207,11 @@ public class RecMLGraphAnalyzer extends XMLAnalyzer {
 	     Dimension viewArea = new Dimension(300, 300);
 	     
 		Layout<MyNode, MyEdge> layout = 
-			//new FRLayout<MyNode, MyEdge>(graph);
-			new KKLayout<MyNode, MyEdge>(graph);
-			//new CircleLayout<MyNode, MyEdge>(graph);
-			//new StaticLayout<MyNode,MyEdge>(graph);
+			 //new FRLayout<MyNode, MyEdge>(graph);
+		new KKLayout<MyNode, MyEdge>(graph);
+		//new CircleLayout<MyNode, MyEdge>(graph);
+		//new StaticLayout<MyNode,MyEdge>(graph);
+		//new ISOMLayout<MyNode, MyEdge>(graph);
 		
 		//	layout.setLocation(n1, new Point2D.Double(100,100));
 	//	layout.setLocation(n2, new Point2D.Double(200,100));
