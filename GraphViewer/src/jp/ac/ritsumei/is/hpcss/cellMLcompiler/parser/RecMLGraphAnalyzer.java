@@ -32,6 +32,8 @@ import jp.ac.ritsumei.is.hpcss.cellMLcompiler.exception.RelMLException;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.exception.TableException;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.exception.TecMLException;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.exception.XMLException;
+import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.recml.RecMLEdge;
+import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.recml.RecMLVertex;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.recML.RecMLDefinition;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.recML.RecMLDefinition.eRecMLGraphTag;
 
@@ -40,11 +42,11 @@ import jp.ac.ritsumei.is.hpcss.cellMLcompiler.recML.RecMLDefinition.eRecMLGraphT
  */
 public class RecMLGraphAnalyzer extends XMLAnalyzer {
 
-	Graph<MyNode,MyEdge> graph;
-	Map<Integer,MyNode> vertexMap;
-	Map<Integer,MyEdge> edgeMap;
-	MyNode	curVertex;
-	MyEdge	curEdge;
+	Graph<RecMLVertex, RecMLEdge> graph;
+	Map<Integer,RecMLVertex> vertexMap;
+	Map<Integer, RecMLEdge> edgeMap;
+	RecMLVertex	curVertex;
+	RecMLEdge	curEdge;
 	
 	Integer varID;
 	Integer equID;
@@ -95,14 +97,15 @@ public class RecMLGraphAnalyzer extends XMLAnalyzer {
 			break;
 		case CTAG_GRAPH:
 		//	graph = new DirectedSparseGraph<MyNode, MyEdge>();
-			graph = new DirectedSparseGraph<MyNode, MyEdge>();
+			graph = new DirectedSparseGraph<RecMLVertex, RecMLEdge>();
 				break;
 		case CTAG_NODES:
-			vertexMap=new HashMap<Integer,MyNode>();
+			vertexMap=new HashMap<Integer,RecMLVertex>();
 			break;
 		case CTAG_NODE:
-			curVertex=new MyNode();
+			curVertex=new RecMLVertex();
 			vertexMap.put(new Integer(pXMLAttr.getValue("id")),curVertex);
+			curVertex.setID(pXMLAttr.getValue("id"));
 			break;
 		case CTAG_VARIABLE:
 			varFlag=true;
@@ -111,10 +114,10 @@ public class RecMLGraphAnalyzer extends XMLAnalyzer {
 			equFlag=true;
 			break;
 		case CTAG_EDGES:
-			edgeMap=new HashMap<Integer,MyEdge>();
+			edgeMap=new HashMap<Integer,RecMLEdge>();
 			break;
 		case CTAG_EDGE:
-			curEdge=new MyEdge();
+			curEdge=new RecMLEdge();
 			edgeMap.put(new Integer(pXMLAttr.getValue("id")),curEdge);
 			break;
 		case CTAG_SOURCE:
@@ -203,28 +206,7 @@ public class RecMLGraphAnalyzer extends XMLAnalyzer {
 		
 	}
 	
-	public void view(){
-	     Dimension viewArea = new Dimension(300, 300);
-	     
-		Layout<MyNode, MyEdge> layout = 
-			 //new FRLayout<MyNode, MyEdge>(graph);
-		new KKLayout<MyNode, MyEdge>(graph);
-		//new CircleLayout<MyNode, MyEdge>(graph);
-		//new StaticLayout<MyNode,MyEdge>(graph);
-		//new ISOMLayout<MyNode, MyEdge>(graph);
-		
-		//	layout.setLocation(n1, new Point2D.Double(100,100));
-	//	layout.setLocation(n2, new Point2D.Double(200,100));
-	//	layout.setLocation(n3, new Point2D.Double(150,200));
-		
-		BasicVisualizationServer<MyNode,MyEdge> panel =
-			new BasicVisualizationServer<MyNode, MyEdge>(layout,new Dimension(300,300));
-		
-		JFrame frame = new JFrame("Graph View");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(panel);
-		frame.pack();
-		frame.setVisible(true);
-		
+	public Graph<RecMLVertex,RecMLEdge> toJungGraph(){
+		return graph;
 	}
 }

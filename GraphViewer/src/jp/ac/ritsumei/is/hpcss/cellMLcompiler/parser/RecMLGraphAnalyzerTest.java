@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.parser.XMLAnalyzer;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.parser.XMLHandler;
+import jp.ac.ritsumei.is.hpcss.cellMLcompiler.viewer.GraphViewer;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -80,10 +81,11 @@ public class RecMLGraphAnalyzerTest {
 	String strCellMLFileName;
 
 	/*RelMLの解析*/
-	if(!parseXMLFile("graph.xml", parser, pRecMLGraphMLAnalyzer)){
+	if(!parseXMLFile("sample/graph.xml", parser, pRecMLGraphMLAnalyzer)){
 	System.exit(1);
 	}
-	pRecMLGraphMLAnalyzer.view();
+	GraphViewer viewer = new GraphViewer();
+	viewer.view(pRecMLGraphMLAnalyzer);
 	
 	}
 

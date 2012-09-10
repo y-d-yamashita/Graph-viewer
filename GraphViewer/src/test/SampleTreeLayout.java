@@ -60,9 +60,9 @@ public class SampleTreeLayout {
 	//layout.setRoot(n1);
 	
 	//Layout<MyNode, MyEdge> layout = new BalloonLayout<MyNode,MyEdge>(graph);
-	layout.setLocation(n1, new Point2D.Double(100,100));
-	layout.setLocation(n2, new Point2D.Double(200,100));
-	layout.setLocation(n3, new Point2D.Double(150,200));
+	//layout.setLocation(n1, new Point2D.Double(100,100));
+//	layout.setLocation(n2, new Point2D.Double(200,100));
+//	layout.setLocation(n3, new Point2D.Double(150,200));
 	
 //	BasicVisualizationServer<MyNode,MyEdge> panel =
 //		new BasicVisualizationServer<MyNode, MyEdge>(layout,new Dimension(300,300));
