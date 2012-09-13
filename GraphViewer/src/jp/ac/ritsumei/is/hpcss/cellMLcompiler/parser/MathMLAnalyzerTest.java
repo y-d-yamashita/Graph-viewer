@@ -83,7 +83,8 @@ public class MathMLAnalyzerTest {
 		System.exit(1);
 		}
 		GraphViewer viewer = new GraphViewer();
-		viewer.view(pMathMLAnalyzer.getExpression(2));
+		viewer.view(pMathMLAnalyzer.m_vecMathExpression);
+//		viewer.view(pMathMLAnalyzer.getExpression(3));
 		
 		
 //		pRecMLGraphMLAnalyzer.view();

@@ -1,20 +1,10 @@
 package jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML;
 
-import java.awt.Dimension;
 import java.util.Stack;
 import java.util.Vector;
-
-import javax.swing.JFrame;
-
-import edu.uci.ics.jung.algorithms.layout.DAGLayout;
 import edu.uci.ics.jung.graph.DelegateTree;
-import edu.uci.ics.jung.visualization.VisualizationViewer;
-import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
-import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
-
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.exception.MathException;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.mathml.MathMLEdge;
-import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.mathml.MathMLVertex;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathMLDefinition.eMathMLClassification;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathMLDefinition.eMathOperand;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathMLDefinition.eMathOperator;
@@ -499,8 +489,8 @@ public class MathExpression {
 		return m_pRootFactor.toLegalString();
 	}
 
-	public DelegateTree<MathMLVertex,MathMLEdge> toJungGraph(){
-		return  m_pRootFactor.toJungGraph(null, null);
+	public DelegateTree<MathFactor,MathMLEdge> toJungGraph(){
+		return  m_pRootFactor.toJungGraph(null);
 	}
 	
 	

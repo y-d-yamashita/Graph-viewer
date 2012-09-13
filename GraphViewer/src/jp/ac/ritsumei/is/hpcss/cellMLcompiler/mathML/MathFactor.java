@@ -3,7 +3,6 @@ package jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML;
 import edu.uci.ics.jung.graph.DelegateTree;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.exception.MathException;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.mathml.MathMLEdge;
-import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.mathml.MathMLVertex;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathMLDefinition.eMathMLClassification;
 
 /**
@@ -94,7 +93,7 @@ public abstract class MathFactor {
 	 * Jungのグラフに変換する
 	 *  @author y-yamashita
 	 */
-	public abstract DelegateTree<MathMLVertex, MathMLEdge>  toJungGraph(DelegateTree<MathMLVertex, MathMLEdge> graph,MathMLVertex parent);
+	public abstract DelegateTree<MathFactor, MathMLEdge>  toJungGraph(DelegateTree<MathFactor, MathMLEdge> graph);
 
 	/**
 	 * toString method

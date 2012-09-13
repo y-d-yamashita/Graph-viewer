@@ -7,7 +7,6 @@ import edu.uci.ics.jung.graph.DelegateTree;
 
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.exception.MathException;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.mathml.MathMLEdge;
-import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.mathml.MathMLVertex;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathMLDefinition.eMathMLClassification;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathMLDefinition.eMathOperand;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathMLDefinition.eMathOperator;
@@ -606,16 +605,14 @@ public abstract class MathOperator extends MathFactor {
 	 *  @author y-yamashita
 	 */
 	@Override
-	public DelegateTree<MathMLVertex, MathMLEdge> toJungGraph(DelegateTree<MathMLVertex, MathMLEdge> graph,MathMLVertex parent){
+	public DelegateTree<MathFactor, MathMLEdge> toJungGraph(DelegateTree<MathFactor, MathMLEdge> graph){
 		if(graph==null){
-			graph = new DelegateTree<MathMLVertex, MathMLEdge>();
-			parent =new MathMLVertex(this);
-			graph.setRoot(parent);
+			graph = new DelegateTree<MathFactor, MathMLEdge>();
+			graph.setRoot(this);
 		}
-			for(MathFactor f:m_vecFactor){	
-				MathMLVertex child = new MathMLVertex(f);
-				graph.addChild(new MathMLEdge(),parent, child);
-				f.toJungGraph(graph, child);
+			for(MathFactor child:m_vecFactor){	
+				graph.addChild(new MathMLEdge(),this, child);
+				child.toJungGraph(graph);
 			}	
 		
 			return graph;

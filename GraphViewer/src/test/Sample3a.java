@@ -20,7 +20,8 @@ public class Sample3a {
 		MyNode n1 = new MyNode("n1");
 		MyNode n2 = new MyNode("n2");
 		MyNode n3 = new MyNode("n3");
-	graph.addVertex(n1);
+		graph.addVertex(n1);
+	//	graph.addVertex(n1);
 	graph.addVertex(n2);
 	graph.addVertex(n3);
 	graph.addEdge(new MyEdge("e1"), n1,n2);

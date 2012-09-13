@@ -3,7 +3,6 @@ package jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML;
 import edu.uci.ics.jung.graph.DelegateTree;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.exception.MathException;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.mathml.MathMLEdge;
-import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.mathml.MathMLVertex;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathMLDefinition.eMathMLClassification;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathMLDefinition.eMathOperand;
 
@@ -104,10 +103,10 @@ public abstract class MathOperand extends MathFactor {
 	 *  @author y-yamashita
 	 */
 	@Override
-	public DelegateTree<MathMLVertex, MathMLEdge> toJungGraph(DelegateTree<MathMLVertex, MathMLEdge> graph,MathMLVertex parent){
+	public DelegateTree<MathFactor, MathMLEdge> toJungGraph(DelegateTree<MathFactor, MathMLEdge> graph){
 		if(graph==null){
-			graph = new DelegateTree<MathMLVertex, MathMLEdge>();
-			graph.setRoot(new MathMLVertex(this));
+			graph = new DelegateTree<MathFactor, MathMLEdge>();
+			graph.setRoot(this);
 		}
 		return graph;
 			
