@@ -80,8 +80,11 @@ public class RecMLGraphAnalyzerTest {
 	String strTecMLFileName;
 	String strCellMLFileName;
 
+	String strRecMLFilename;
+//	strRecMLFilename="sample/sample.xml";
+	strRecMLFilename="sample/recmlGraphSample.recml";
 	/*RelMLの解析*/
-	if(!parseXMLFile("sample/graph.xml", parser, pRecMLGraphMLAnalyzer)){
+	if(!parseXMLFile(strRecMLFilename, parser, pRecMLGraphMLAnalyzer)){
 	System.exit(1);
 	}
 	GraphViewer viewer = new GraphViewer();

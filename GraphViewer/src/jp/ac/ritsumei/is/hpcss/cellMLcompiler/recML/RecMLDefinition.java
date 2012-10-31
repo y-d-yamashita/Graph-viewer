@@ -54,32 +54,7 @@ public class RecMLDefinition {
 	public static final String RECML_TAG_STR_DEST 	= "dest";
 
 
-	/**
-	 * 
-	 * @author y-yamashita
-	 *
-	 */
-	public enum eRecMLGraphTag{
-		CTAG_RECML		(RECML_TAG_STR_RECML),
-		CTAG_GRAPH		(RECML_TAG_STR_GRAPH),
-		CTAG_NODES		(RECML_TAG_STR_NODES),
-		CTAG_NODE		(RECML_TAG_STR_NODE),
-		CTAG_VARIABLE	(RECML_TAG_STR_VARIABLE),
-		CTAG_EQUATION	(RECML_TAG_STR_EQUATIN),
-		CTAG_EDGES		(RECML_TAG_STR_EDGES),
-		CTAG_EDGE		(RECML_TAG_STR_EDGE),
-		CTAG_SOURCE		(RECML_TAG_STR_SOURCE),
-		CTAG_DEST		(RECML_TAG_STR_DEST)
-			;
-		private final String operatorStr;
-		private eRecMLGraphTag(String operatorstr) {
-			operatorStr = operatorstr;
-		}
-		private String getOperatorStr() {
-			return operatorStr;
-		}
-
-	};
+	
 	
 	public enum eRecMLTag {
 		CTAG_RECML		(RECML_TAG_STR_RECML),
@@ -126,26 +101,7 @@ public class RecMLDefinition {
 					  "invalid RecML tag : " + strTag);
 
 	}
-		/**
-		 * 
-		 * @param strTag
-		 * @return
-		 * @throws RecMLException
-		 * @author y-yamashita
-		 */
-	public static eRecMLGraphTag getRecMLGraphTagId(String strTag)
-		throws RecMLException {
-			/*演算子と比較*/
-			for (eRecMLGraphTag t: eRecMLGraphTag.values()) {
-				if (t.getOperatorStr().equals(strTag)) {
-					return t;
-				}
-			}
 
-		/*見つからなければ例外*/
-		throw new RecMLException("","getRecMLTagId",
-					  "invalid RecML tag : " + strTag);
-	}
 	
 	//========================================================
 	//getTecMLVarType

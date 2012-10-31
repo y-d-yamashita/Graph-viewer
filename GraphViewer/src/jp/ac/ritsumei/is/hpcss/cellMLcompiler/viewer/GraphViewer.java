@@ -15,16 +15,20 @@ import javax.swing.JPanel;
 import edu.uci.ics.jung.algorithms.layout.DAGLayout;
 import edu.uci.ics.jung.algorithms.layout.KKLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 import edu.uci.ics.jung.graph.DelegateTree;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.field.FieldEdge;
+import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.field.FieldVertex;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.mathml.MathMLEdge;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.recml.RecMLEdge;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.recml.RecMLVertex;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathExpression;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.mathML.MathFactor;
+import jp.ac.ritsumei.is.hpcss.cellMLcompiler.parser.FieldGraphAnalyzer;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.parser.RecMLGraphAnalyzer;
 
 
@@ -246,4 +250,39 @@ public class GraphViewer implements ActionListener{
 		frame.setVisible(true);
 
 	}
+	
+
+	public void view(FieldGraphAnalyzer fieldGraphAnalyzer)
+	{
+	     Dimension viewArea = new Dimension(300, 300);
+	     
+		Layout<FieldVertex, FieldEdge> layout = 
+			 //new FRLayout<FieldVertex, FieldEdge>(fieldGraphAnalyzer.toJungGraph());
+		//new KKLayout<FieldVertex, FieldEdge>(fieldGraphAnalyzer.toJungGraph());
+		//new CircleLayout<FieldVertex, FieldEdge>(fieldGraphAnalyzer.toJungGraph());
+		new StaticLayout<FieldVertex, FieldEdge>(fieldGraphAnalyzer.toJungGraph());
+		//new ISOMLayout<<FieldVertex, FieldEdge>(fieldGraphAnalyzer.toJungGraph());
+		
+		//	layout.setLocation(n1, new Point2D.Double(100,100));
+	//	layout.setLocation(n2, new Point2D.Double(200,100));
+	//	layout.setLocation(n3, new Point2D.Double(150,200));
+
+	 	VisualizationViewer<FieldVertex, FieldEdge>panel =
+		 		new VisualizationViewer<FieldVertex, FieldEdge>(layout,new Dimension(300,300));
+ 	
+	 	  DefaultModalGraphMouse<Integer,Number> gm = 
+		           new DefaultModalGraphMouse<Integer,Number>();
+		          gm.setMode(DefaultModalGraphMouse.Mode.PICKING);
+		          panel.setGraphMouse(gm);
+	panel.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<FieldVertex>());
+  		
+		JFrame frame = new JFrame("Graph View");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().add(panel);
+		frame.pack();
+		frame.setVisible(true);
+
+	}
+	
+
 }

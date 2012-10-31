@@ -35,7 +35,8 @@ import jp.ac.ritsumei.is.hpcss.cellMLcompiler.exception.XMLException;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.recml.RecMLEdge;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.graph.recml.RecMLVertex;
 import jp.ac.ritsumei.is.hpcss.cellMLcompiler.recML.RecMLDefinition;
-import jp.ac.ritsumei.is.hpcss.cellMLcompiler.recML.RecMLDefinition.eRecMLGraphTag;
+import jp.ac.ritsumei.is.hpcss.cellMLcompiler.recML.RecMLGraphDefinition;
+import jp.ac.ritsumei.is.hpcss.cellMLcompiler.recML.RecMLGraphDefinition.eRecMLGraphTag;
 
 /**
  * MathML解析クラス.
@@ -57,10 +58,13 @@ public class RecMLGraphAnalyzer extends XMLAnalyzer {
 	boolean equFlag;
 	boolean srcFlag;
 	boolean dstFlag;
+	
+	private boolean parseMode;
 /**
 	 * MathML解析インスタンスを作成する.
 	 */
 	public RecMLGraphAnalyzer() {
+		setParseMode(false);
 		}
 
 		/* ========================================================
@@ -81,7 +85,7 @@ public class RecMLGraphAnalyzer extends XMLAnalyzer {
 		eRecMLGraphTag tagKind;
 		/*タグの種類を特定*/
 		try {
-			tagKind = RecMLDefinition.getRecMLGraphTagId(strTag);
+			tagKind = RecMLGraphDefinition.getRecMLGraphTagId(strTag);
 		}
 		catch (RecMLException e) {
 			System.err.println(e.getMessage());
@@ -144,7 +148,7 @@ public class RecMLGraphAnalyzer extends XMLAnalyzer {
 
 		/*タグの種類を特定*/
 		try{
-			tagKind = RecMLDefinition.getRecMLGraphTagId(strTag);
+			tagKind = RecMLGraphDefinition.getRecMLGraphTagId(strTag);
 		}catch (RecMLException e) {
 			System.err.println(e.getMessage());
 		throw new RecMLException("Analyzer","findTagStart",
@@ -208,5 +212,13 @@ public class RecMLGraphAnalyzer extends XMLAnalyzer {
 	
 	public Graph<RecMLVertex,RecMLEdge> toJungGraph(){
 		return graph;
+	}
+
+	public boolean isParseMode() {
+		return parseMode;
+	}
+
+	public void setParseMode(boolean parseMode) {
+		this.parseMode = parseMode;
 	}
 }
